@@ -1,0 +1,5 @@
+@media screen and (min-width: 50rem) {
+  .content {
+    margin-left: var(--header-width);
+  }
+}

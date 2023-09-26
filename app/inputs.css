@@ -1,0 +1,31 @@
+button,
+summary,
+input,
+textarea,
+select {
+  border-radius: 0.75rem;
+  border: var(--border);
+  padding: 0.5rem 1rem;
+  line-height: 1.5rem;
+  font-size: 0.875rem;
+}
+
+button {
+  display: inline flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  cursor: pointer;
+}
+
+input[type="text"] {
+  width: 100%;
+}
+
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: var(--primary-2) solid 2px;
+}

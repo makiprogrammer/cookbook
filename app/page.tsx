@@ -1,19 +1,10 @@
-// import styles from "./page.module.css";
-import { prisma } from "./utils/prisma";
-
-export default async function Home() {
-  const posts = await prisma.post.findMany();
+export default async function HomePage() {
   return (
     <main>
-      <h1>Hello</h1>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.content}</p>
-          </li>
-        ))}
-      </ul>
+      <section>
+        <h1>Wildly Delicious Meals.</h1>
+        <p>Cook with us! </p>
+      </section>
     </main>
   );
 }
