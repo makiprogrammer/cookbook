@@ -1,0 +1,33 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.root ol {
+  padding-left: 2rem;
+  list-style: decimal;
+}
+
+.item .hidden {
+  visibility: hidden;
+  line-height: 1rem;
+  /* this is required for li::marker to render
+  baseline to first line of text */
+}
+.item div {
+  position: relative;
+  top: -1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.item textarea {
+  display: inline;
+  flex-grow: 1;
+  box-sizing: content-box;
+  min-height: 3rem !important; /* 2 lines */
+}
+.item button {
+  padding: 0.25rem;
+}

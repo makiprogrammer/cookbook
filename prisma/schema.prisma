@@ -40,9 +40,9 @@ enum Unit {
   GRAM
   // volume
   MILLILITER
-  // CUP
-  // TABLESPOON
-  // TEASPOON
+  CUP
+  TABLESPOON
+  TEASPOON
   // count
   PIECE
 }

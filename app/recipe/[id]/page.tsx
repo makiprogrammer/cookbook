@@ -1,3 +1,6 @@
+import Link from "next/link";
+
+import { Button } from "components/Button";
 import { Icon } from "components/Icon";
 import { PageTitle, PageContent } from "components/PageStructure";
 import { formatTimeSpan } from "global/format";
@@ -5,7 +8,7 @@ import {
   mealIconType,
   useMealTypes,
   useKitchenEquipment,
-  allUnitsMap,
+  unitNames,
   useIngredients,
 } from "global/meals";
 import { prisma } from "global/prisma";
@@ -22,7 +25,7 @@ export default async function RecipePage({
     include: { ingredients: true },
   });
 
-  const rawIngredientsObject = await useIngredients(recipe);
+  const { rawIngredientsMap } = await useIngredients(recipe.ingredients);
 
   const { mealTypes } = useMealTypes();
   const { equipment } = useKitchenEquipment();
@@ -30,7 +33,17 @@ export default async function RecipePage({
   return (
     <main className={styles.root}>
       <PageTitle className={styles.title}>
-        <h1>{recipe.name}</h1>
+        <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+          <h1>{recipe.name}</h1>
+          <Link
+            href={`/recipe/edit/${recipe.id}`}
+            style={{ marginLeft: "auto" }}
+          >
+            <Button icon="edit" theme="white">
+              Edit
+            </Button>
+          </Link>
+        </div>
         {recipe.description && <p>{recipe.description}</p>}
       </PageTitle>
 
@@ -62,8 +75,8 @@ export default async function RecipePage({
             <ul style={{ listStyle: "initial" }} className={styles.list}>
               {recipe.ingredients.map((ing) => (
                 <li key={ing.ingredientId}>
-                  {rawIngredientsObject[ing.ingredientId].name} ({ing.amount}{" "}
-                  {allUnitsMap[ing.unit]})
+                  {rawIngredientsMap[ing.ingredientId].name} ({ing.amount}{" "}
+                  {unitNames[ing.unit]})
                 </li>
               ))}
             </ul>

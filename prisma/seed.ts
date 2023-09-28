@@ -21,6 +21,15 @@ async function seedIngredients() {
       unitType: "WEIGHT",
     },
   });
+  await prisma.ingredient.upsert({
+    where: { id: 3 },
+    update: {},
+    create: {
+      id: 3,
+      name: "potatoes",
+      unitType: "WEIGHT",
+    },
+  });
 }
 
 async function seedRecipes() {
@@ -74,11 +83,23 @@ async function seedRecipes() {
     },
   });
 
-  await prisma.recipeIngredient.create({
-    data: {
+  await prisma.recipeIngredient.upsert({
+    where: { recipeId_ingredientId: { recipeId: 2, ingredientId: 2 } },
+    update: {},
+    create: {
       recipeId: 2,
       ingredientId: 2,
-      amount: 2,
+      amount: 200,
+      unit: "GRAM",
+    },
+  });
+  await prisma.recipeIngredient.upsert({
+    where: { recipeId_ingredientId: { recipeId: 2, ingredientId: 3 } },
+    update: {},
+    create: {
+      recipeId: 2,
+      ingredientId: 3,
+      amount: 300,
       unit: "GRAM",
     },
   });

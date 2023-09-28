@@ -1,0 +1,30 @@
+.details {
+  position: relative;
+  font-weight: normal;
+}
+
+.list {
+  position: absolute;
+  top: 3rem;
+  z-index: 10;
+  background-color: white;
+
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  border: var(--border);
+  border-radius: 0.75rem;
+}
+
+.list button {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: var(--border);
+  background-color: #f9fafa;
+}
+
+.list li[aria-selected="true"] button {
+  border-color: var(--primary);
+  background-color: var(--primary-light);
+}

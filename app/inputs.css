@@ -22,6 +22,11 @@ input[type="text"] {
   width: 100%;
 }
 
+select {
+  box-sizing: content-box;
+  height: 1.5rem;
+}
+
 button:focus-visible,
 summary:focus-visible,
 input:focus-visible,
