@@ -1,6 +1,13 @@
-import { KitchenEquipment, MealType, Unit } from "@prisma/client";
+import {
+  KitchenEquipment,
+  MealType,
+  RecipeIngredient,
+  Unit,
+} from "@prisma/client";
 
 import { IconType } from "components/Icon";
+
+import { prisma } from "./prisma";
 
 export const mealIconType: Record<MealType, IconType> = {
   DRINK: "coffee",
@@ -42,8 +49,26 @@ export function useKitchenEquipment() {
     PAN: "pan",
   };
   const equipmentList = Object.entries(equipment).map(([id, label]) => ({
-    id,
+    id: id as KitchenEquipment,
     label,
   }));
   return { equipment, equipmentList };
+}
+
+export const allUnitsMap: Record<Unit, string> = {
+  GRAM: "g",
+  MILLILITER: "ml",
+  PIECE: "piece(s)",
+};
+
+export async function useIngredients(recipe: {
+  ingredients: RecipeIngredient[];
+}) {
+  const rawIngredients = await prisma.ingredient.findMany({
+    where: { id: { in: recipe.ingredients.map((i) => i.ingredientId) } },
+  });
+  const rawIngredientsMap = Object.fromEntries(
+    rawIngredients.map((raw) => [raw.id, raw])
+  );
+  return rawIngredientsMap;
 }

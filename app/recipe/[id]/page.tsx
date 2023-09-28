@@ -1,6 +1,13 @@
 import { Icon } from "components/Icon";
 import { PageTitle, PageContent } from "components/PageStructure";
-import { mealIconType, useMealTypes, useKitchenEquipment } from "global/meals";
+import { formatTimeSpan } from "global/format";
+import {
+  mealIconType,
+  useMealTypes,
+  useKitchenEquipment,
+  allUnitsMap,
+  useIngredients,
+} from "global/meals";
 import { prisma } from "global/prisma";
 
 import styles from "./RecipePage.module.css";
@@ -14,9 +21,9 @@ export default async function RecipePage({
     where: { id: Number(params.id) },
     include: { ingredients: true },
   });
-  const ingredients = await prisma.ingredient.findMany({
-    where: { id: { in: recipe.ingredients.map((i) => i.ingredientId) } },
-  });
+
+  const rawIngredientsObject = await useIngredients(recipe);
+
   const { mealTypes } = useMealTypes();
   const { equipment } = useKitchenEquipment();
 
@@ -28,20 +35,20 @@ export default async function RecipePage({
       </PageTitle>
 
       <PageContent>
-        <section className={styles.properties}>
-          <span>
+        <ul className={styles.properties} aria-label="Properties">
+          <li>
             <Icon type={mealIconType[recipe.mealType]} />
             {mealTypes[recipe.mealType]}
-          </span>
-          <span>
+          </li>
+          <li>
             <Icon type="users" />
             {recipe.servings} serving(s)
-          </span>
-          <span>
+          </li>
+          <li>
             <Icon type="clock" />
-            {recipe.totalTime} min cook time
-          </span>
-        </section>
+            {formatTimeSpan({ minutes: recipe.totalTime })} cook time
+          </li>
+        </ul>
         <section>
           <p className={styles.equipment}>
             <span style={{ fontWeight: "bold" }}>Equipment needed: </span>
@@ -53,8 +60,11 @@ export default async function RecipePage({
           <section className={styles.section}>
             <h2>Ingredients</h2>
             <ul style={{ listStyle: "initial" }} className={styles.list}>
-              {ingredients.map((ingredient) => (
-                <li key={ingredient.id}>{ingredient.name}</li>
+              {recipe.ingredients.map((ing) => (
+                <li key={ing.ingredientId}>
+                  {rawIngredientsObject[ing.ingredientId].name} ({ing.amount}{" "}
+                  {allUnitsMap[ing.unit]})
+                </li>
               ))}
             </ul>
           </section>
