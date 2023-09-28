@@ -66,7 +66,7 @@ export function DirectionsEditor({
 
   return (
     <div className={classNames(className, styles.root)}>
-      <label>Ingredients</label>
+      <label>Directions</label>
       <ol className={styles.list}>
         {items.map(({ key, defaultValue }) => (
           <SingleDirection

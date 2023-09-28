@@ -141,7 +141,10 @@ export function IngredientsEditor({
       <Button
         type="button"
         icon="plus"
-        onClick={() => dialogRef.current?.showModal()}
+        onClick={() => {
+          dialogRef.current?.showModal();
+          searchRef.current?.focus();
+        }}
       >
         Add an ingredient
       </Button>
