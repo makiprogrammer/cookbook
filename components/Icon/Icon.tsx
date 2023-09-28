@@ -111,6 +111,7 @@ export function Icon({ type, ...props }: IconProps) {
       fill="none"
       stroke="currentColor"
       {...props}
+      aria-hidden
     >
       <Children />
     </svg>

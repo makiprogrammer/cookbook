@@ -1,0 +1,13 @@
+.root {
+  display: flex;
+  gap: 1rem;
+
+  background-color: #f4f4f4;
+  padding: 1rem 2rem;
+  border-bottom: var(--border);
+}
+
+.root h1 {
+  font-size: x-large;
+  font-weight: inherit;
+}
