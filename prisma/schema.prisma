@@ -7,10 +7,77 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
+enum KitchenEquipment {
+  PAN
+  OVEN
+  STOVE
+  MICROWAVE
+  GRILL
+  FRYER
+  BLENDER
+}
+
+enum MealType {
+  DRINK
+  BREAKFAST
+  APPETIZER
+  SOUP
+  MAIN
+  DESSERT
+  SNACK
+  OTHER
+}
+
+enum UnitType {
+  WEIGHT // grams, maybe imperial units...
+  VOLUME // milliliters, liters, cups, tablespoons, teaspoons
+  COUNT
+  NONE // for salt
+}
+
+enum Unit {
+  // weight
+  GRAM
+  // volume
+  MILLILITER
+  // CUP
+  // TABLESPOON
+  // TEASPOON
+  // count
+  PIECE
+}
+
+model Recipe {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  mealType    MealType
+  servings    Int
+  totalTime   Int
+
+  ingredients RecipeIngredient[]
+  directions  String[]
+  equipment   KitchenEquipment[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  title     String
-  content   String
+}
+
+model Ingredient {
+  id              Int                @id @default(autoincrement())
+  name            String
+  unitType        UnitType
+  recipeRelations RecipeIngredient[]
+}
+
+model RecipeIngredient {
+  recipeId     Int
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  ingredientId Int
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+
+  amount Float
+  unit   Unit
+
+  @@id([recipeId, ingredientId])
 }
