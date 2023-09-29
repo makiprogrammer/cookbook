@@ -29,7 +29,7 @@ export default function ProfileEditor() {
     const newSettings = formDataToObject(formData, [
       "equipment",
       "allergies",
-    ]) as ProfileSettings;
+    ]) as unknown as ProfileSettings;
     setProfileSettings(newSettings);
     alert("Settings saved!");
   };

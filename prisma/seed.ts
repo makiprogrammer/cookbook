@@ -10,6 +10,7 @@ async function seedIngredients() {
       id: 1,
       name: "egg",
       unitType: "COUNT",
+      allergens: ["EGGS"],
     },
   });
   await prisma.ingredient.upsert({

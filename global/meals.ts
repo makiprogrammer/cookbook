@@ -40,6 +40,7 @@ export const mealTypeList = Object.entries(mealTypeNames).map(
     label,
   })
 );
+export const mealTypeListIds = mealTypeList.map((mt) => mt.id);
 
 export const equipmentNames: Record<KitchenEquipment, string> = {
   OVEN: "oven",
@@ -53,6 +54,7 @@ export const equipmentNames: Record<KitchenEquipment, string> = {
 export const equipmentList = Object.entries(equipmentNames).map(
   ([id, label]) => ({ id: id as KitchenEquipment, label })
 );
+export const equipmentListIds = equipmentList.map((eq) => eq.id);
 
 export const unitNames: Record<Unit, string> = {
   GRAM: "g",
@@ -85,6 +87,7 @@ export const allergyList = Object.entries(allergyNames).map(([id, label]) => ({
   id: id as Allergen,
   label,
 }));
+export const allergyListIds = allergyList.map((a) => a.id);
 
 export const calorieIntakeNames: Record<CalorieIntake, string> = {
   LOW: "Low",
@@ -94,6 +97,7 @@ export const calorieIntakeNames: Record<CalorieIntake, string> = {
 export const calorieIntakeList = Object.entries(calorieIntakeNames).map(
   ([id, label]) => ({ id: id as CalorieIntake, label })
 );
+export const calorieIntakeListIds = calorieIntakeList.map((ci) => ci.id);
 
 /** An object mapping raw ingredient id with the `Ingredient` object. */
 export type IngredientMapping = Record<string, Ingredient>;
