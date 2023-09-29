@@ -1,6 +1,6 @@
 export default async function HomePage() {
   return (
-    <main>
+    <main style={{ padding: "2rem" }}>
       <section>
         <h1>Wildly Delicious Meals.</h1>
         <p>Cook with us! </p>
