@@ -10,4 +10,5 @@ export const NAVIGATION_LINKS: NavigationItem[] = [
   { href: "/explore", label: "Explore", icon: "globe" },
   // { href: "/planner", label: "Planner", icon: "calendar" },
   { href: "/profile", label: "My Profile", icon: "user" },
+  { href: "/ingredients", label: "Ingredients", icon: "feather" },
 ];

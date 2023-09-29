@@ -72,6 +72,17 @@ export const unitsOfType: Record<UnitType, Unit[]> = {
   NONE: [],
 };
 
+export const unitTypeNames: Record<UnitType, string> = {
+  WEIGHT: "weight",
+  VOLUME: "volume",
+  COUNT: "count",
+  NONE: "none",
+};
+export const unitTypeList = Object.entries(unitTypeNames).map(
+  ([id, label]) => ({ id: id as UnitType, label })
+);
+export const unitTypeListIds = unitTypeList.map((ut) => ut.id);
+
 export const allergyNames: Record<Allergen, string> = {
   GLUTEN: "gluten",
   DAIRY: "dairy",
