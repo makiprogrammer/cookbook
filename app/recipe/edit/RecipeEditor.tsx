@@ -1,6 +1,6 @@
 "use client";
 
-import { Recipe, Unit } from "@prisma/client";
+import { MealType, Recipe, Unit } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { FormEventHandler, useCallback, useRef } from "react";
 
@@ -117,7 +117,11 @@ export function RecipeEditor({ recipe, recipeIngredients }: RecipeEditorProps) {
 
         <label>
           Meal type
-          <select name="mealType" defaultValue={recipe?.mealType} required>
+          <select
+            name="mealType"
+            defaultValue={recipe?.mealType ?? MealType.MAIN}
+            required
+          >
             {mealTypeList.map((mealType) => (
               <option key={mealType.id} value={mealType.id}>
                 {mealType.label}

@@ -26,6 +26,7 @@ let recipeEditSchema = object({
 });
 
 export function validateRecipeEditorValues(object: any) {
+  object.id = Number(object.id) ?? undefined;
   const casted = recipeEditSchema.validateSync(object, { stripUnknown: true });
   const { mealType, equipment, ingredients, ...rest } = casted;
 

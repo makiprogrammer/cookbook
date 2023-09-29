@@ -15,11 +15,12 @@ export async function POST(request: NextRequest) {
   const suspectedRecipe = await request.json();
 
   try {
-    const { recipe, recipeIngredients } =
+    const { recipe: recipeWithId, recipeIngredients } =
       validateRecipeEditorValues(suspectedRecipe);
-    const databaseRecipe = recipe.id
+    const { id, ...recipe } = recipeWithId;
+    const databaseRecipe = id
       ? await prisma.recipe.update({
-          where: { id: recipe.id },
+          where: { id },
           data: recipe,
         })
       : await prisma.recipe.create({
