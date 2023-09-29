@@ -7,8 +7,9 @@ import { FormEventHandler, useCallback, useRef } from "react";
 import { Button } from "components/Button";
 import { Multiselect } from "components/Multiselect";
 import { formDataToObject } from "global/formData";
-import { useKitchenEquipment, useMealTypes } from "global/meals";
+import { equipmentList, mealTypeList } from "global/meals";
 import { postJson } from "global/postJson";
+import { FormSubmitHandler } from "global/types";
 
 import { DirectionsEditor } from "./DirectionsEditor";
 import { IngredientsEditor } from "./IngredientsEditor";
@@ -30,9 +31,6 @@ export interface RecipeEditorProps {
 export function RecipeEditor({ recipe, recipeIngredients }: RecipeEditorProps) {
   const router = useRouter();
 
-  const { mealTypesList } = useMealTypes();
-  const { equipmentList } = useKitchenEquipment();
-
   const totalTime = recipe?.totalTime ?? 0;
   const defaultHours = Math.floor(totalTime / 60);
   const defaultMinutes = totalTime % 60;
@@ -41,7 +39,7 @@ export function RecipeEditor({ recipe, recipeIngredients }: RecipeEditorProps) {
     recipeIngredients ?? []
   );
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(
+  const onSubmit: FormSubmitHandler = useCallback(
     async (e) => {
       e.preventDefault(); // no form action
       const formData = new FormData(e.currentTarget);
@@ -120,8 +118,8 @@ export function RecipeEditor({ recipe, recipeIngredients }: RecipeEditorProps) {
         <label>
           Meal type
           <select name="mealType" defaultValue={recipe?.mealType} required>
-            {mealTypesList.map((mealType) => (
-              <option key={mealType.key} value={mealType.key}>
+            {mealTypeList.map((mealType) => (
+              <option key={mealType.id} value={mealType.id}>
                 {mealType.label}
               </option>
             ))}

@@ -47,6 +47,24 @@ enum Unit {
   PIECE
 }
 
+enum Allergen {
+  GLUTEN
+  DAIRY
+  EGGS
+  SOY
+  FISH
+  SHELLFISH
+  PEANUT
+  TREE_NUTS
+  SESAME
+}
+
+enum CalorieIntake {
+  LOW
+  MEDIUM
+  HIGH
+}
+
 model Recipe {
   id          Int      @id @default(autoincrement())
   name        String
@@ -68,6 +86,8 @@ model Ingredient {
   name            String
   unitType        UnitType
   recipeRelations RecipeIngredient[]
+  allergens       Allergen[]         @default([])
+  calorieIntake   CalorieIntake      @default(MEDIUM)
 }
 
 model RecipeIngredient {

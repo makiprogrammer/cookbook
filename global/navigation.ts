@@ -8,6 +8,6 @@ export interface NavigationItem {
 
 export const NAVIGATION_LINKS: NavigationItem[] = [
   { href: "/explore", label: "Explore", icon: "globe" },
-  { href: "/planner", label: "Planner", icon: "calendar" },
+  // { href: "/planner", label: "Planner", icon: "calendar" },
   { href: "/profile", label: "My Profile", icon: "user" },
 ];

@@ -1,4 +1,6 @@
 import {
+  Allergen,
+  CalorieIntake,
   Ingredient,
   KitchenEquipment,
   MealType,
@@ -22,40 +24,35 @@ export const mealIconType: Record<MealType, IconType> = {
   OTHER: "star",
 };
 
-export function useMealTypes() {
-  const mealTypes: Record<MealType, string> = {
-    DRINK: "Drink",
-    BREAKFAST: "Breakfast",
-    APPETIZER: "Appetizer",
-    SOUP: "Soup",
-    MAIN: "Main course",
-    DESSERT: "Dessert",
-    SNACK: "Snack",
-    OTHER: "Other",
-  };
-  const mealTypesList = Object.entries(mealTypes).map(([key, label]) => ({
-    key,
+export const mealTypeNames: Record<MealType, string> = {
+  DRINK: "Drink",
+  BREAKFAST: "Breakfast",
+  APPETIZER: "Appetizer",
+  SOUP: "Soup",
+  MAIN: "Main course",
+  DESSERT: "Dessert",
+  SNACK: "Snack",
+  OTHER: "Other",
+};
+export const mealTypeList = Object.entries(mealTypeNames).map(
+  ([id, label]) => ({
+    id: id as MealType,
     label,
-  }));
-  return { mealTypes, mealTypesList };
-}
+  })
+);
 
-export function useKitchenEquipment() {
-  const equipment: Record<KitchenEquipment, string> = {
-    OVEN: "oven",
-    STOVE: "stove",
-    MICROWAVE: "microwave",
-    GRILL: "grill",
-    FRYER: "fryer",
-    BLENDER: "blender",
-    PAN: "pan",
-  };
-  const equipmentList = Object.entries(equipment).map(([id, label]) => ({
-    id: id as KitchenEquipment,
-    label,
-  }));
-  return { equipment, equipmentList };
-}
+export const equipmentNames: Record<KitchenEquipment, string> = {
+  OVEN: "oven",
+  STOVE: "stove",
+  MICROWAVE: "microwave",
+  GRILL: "grill",
+  FRYER: "fryer",
+  BLENDER: "blender",
+  PAN: "pan",
+};
+export const equipmentList = Object.entries(equipmentNames).map(
+  ([id, label]) => ({ id: id as KitchenEquipment, label })
+);
 
 export const unitNames: Record<Unit, string> = {
   GRAM: "g",
@@ -72,6 +69,31 @@ export const unitsOfType: Record<UnitType, Unit[]> = {
   COUNT: [Unit.PIECE],
   NONE: [],
 };
+
+export const allergyNames: Record<Allergen, string> = {
+  GLUTEN: "gluten",
+  DAIRY: "dairy",
+  EGGS: "eggs",
+  SOY: "soy",
+  FISH: "fish",
+  SHELLFISH: "shellfish",
+  PEANUT: "peanut",
+  TREE_NUTS: "tree nuts",
+  SESAME: "sesame",
+};
+export const allergyList = Object.entries(allergyNames).map(([id, label]) => ({
+  id: id as Allergen,
+  label,
+}));
+
+export const calorieIntakeNames: Record<CalorieIntake, string> = {
+  LOW: "Low",
+  MEDIUM: "Medium",
+  HIGH: "High",
+};
+export const calorieIntakeList = Object.entries(calorieIntakeNames).map(
+  ([id, label]) => ({ id: id as CalorieIntake, label })
+);
 
 /** An object mapping raw ingredient id with the `Ingredient` object. */
 export type IngredientMapping = Record<string, Ingredient>;

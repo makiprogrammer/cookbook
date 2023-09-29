@@ -5,9 +5,9 @@ import { Icon } from "components/Icon";
 import { PageTitle, PageContent } from "components/PageStructure";
 import { formatTimeSpan } from "global/format";
 import {
+  equipmentNames,
   mealIconType,
-  useMealTypes,
-  useKitchenEquipment,
+  mealTypeNames,
   unitNames,
   useIngredients,
 } from "global/meals";
@@ -26,9 +26,6 @@ export default async function RecipePage({
   });
 
   const { rawIngredientsMap } = await useIngredients(recipe.ingredients);
-
-  const { mealTypes } = useMealTypes();
-  const { equipment } = useKitchenEquipment();
 
   return (
     <main className={styles.root}>
@@ -51,7 +48,7 @@ export default async function RecipePage({
         <ul className={styles.properties} aria-label="Properties">
           <li>
             <Icon type={mealIconType[recipe.mealType]} />
-            {mealTypes[recipe.mealType]}
+            {mealTypeNames[recipe.mealType]}
           </li>
           <li>
             <Icon type="users" />
@@ -65,7 +62,7 @@ export default async function RecipePage({
         <section>
           <p className={styles.equipment}>
             <span style={{ fontWeight: "bold" }}>Equipment needed: </span>
-            {recipe.equipment.map((eq) => equipment[eq]).join(", ")}
+            {recipe.equipment.map((eq) => equipmentNames[eq]).join(", ")}
           </p>
         </section>
 
