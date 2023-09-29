@@ -14,6 +14,7 @@ import {
 import { Button } from "components/Button";
 import { unitNames, unitsOfType } from "global/meals";
 import { ClassName } from "global/types";
+import { useDebounceCallback } from "global/useDebounceCallback";
 
 import { IngredientSearchResponse } from "./ingredients/route";
 import styles from "./IngredientsEditor.module.css";
@@ -23,9 +24,6 @@ export interface IngredientsEditorProps {
   className?: ClassName;
   dataRef: MutableRefObject<RecipeIngredientBase[]>;
 }
-
-type TimeoutId = ReturnType<typeof setTimeout>;
-const SEARCH_TIMEOUT = 350;
 
 function displayIngredient(ingredient: RecipeIngredientBase) {
   return `${ingredient._name} (${ingredient.amount} ${
@@ -39,7 +37,6 @@ export function IngredientsEditor({
 }: IngredientsEditorProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
-  const searchTimeout = useRef<TimeoutId | null>(null);
   const amountRef = useRef<HTMLInputElement>(null);
   const unitRef = useRef<HTMLSelectElement>(null);
 
@@ -71,15 +68,7 @@ export function IngredientsEditor({
     if (json.ingredients) setFilteredIngredients(json.ingredients ?? []);
   }, []);
 
-  const onSearchTextChange = useCallback(async () => {
-    // prevent searching too often
-    if (searchTimeout.current) clearTimeout(searchTimeout.current);
-    searchTimeout.current = setTimeout(fetchSearchResults, SEARCH_TIMEOUT);
-
-    return () => {
-      if (searchTimeout.current) clearTimeout(searchTimeout.current);
-    };
-  }, [fetchSearchResults]);
+  const onSearchTextChange = useDebounceCallback(fetchSearchResults, 350);
 
   const addIngredient = useCallback(() => {
     if (!ingredientToAdd) return;
