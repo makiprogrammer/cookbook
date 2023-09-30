@@ -1,6 +1,6 @@
 # Simple cook book implementation
 
-This project contains a NextJs & Postgres full-stack application for managing
+This project contains a NextJs full-stack application for managing
 recipes and their ingredients. The recipe search is customizable to satisfy
 user's kitchen equipment, allergies and preferences.
 
@@ -19,18 +19,10 @@ types and synchronize the [schema](/prisma/schema.prisma) with the database.
 After successful build stage, the app can be started using `npm run start`.
 
 To view the application during development, use `npm run dev`. In this case
-you have to synchronize database manually. See [other commands](/package.json).
+you have to synchronize database manually using `npm run sync-db`.
+See [other commands](/package.json) or [developer documentation](/DOCUMENTATION.md).
 
-## Database commands
-
-There are the following Prisma database commands:
-
-- `npm sync-db`: uses the schema specified in `prisma/schema.prisma` file
-  to apply to the database - will generate tables, relations, ect.
-- `npm run seeds`: seeds the database with initial seed data. Useful for
-  first application run.
-
-## Application overview
+## Application overview for users
 
 An user can set their allergies, kitchen equipment and other preferences
 in the `My Profile` page. These settings are then attached to recipe search.
